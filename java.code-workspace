@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "simple"
+		},
+		{
+			"path": "assignments"
+		},
+		{
+			"path": "swing"
+		}
+	],
+	"settings": {
+		"java.project.sourcePaths": [
+			""
+		],
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.project.referencedLibraries": [
+			"lib/**/*.jar",
+			"/media/ssmj/File/Programming/SaxonHE10-6J/jline-2.14.6.jar",
+			"/media/ssmj/File/Programming/SaxonHE10-6J/saxon-he-10.6.jar",
+			"/media/ssmj/File/Programming/SaxonHE10-6J/saxon-he-test-10.6.jar"
+		]
+	}
+}
