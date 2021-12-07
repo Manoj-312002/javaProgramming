@@ -9,7 +9,7 @@ public class ping2 {
         System.out.print("Enter number of packets : ");
         int np = sc.nextInt();
 
-        Process p = Runtime.getRuntime().exec("ping -n " + np + " " + ip );
+        Process p = Runtime.getRuntime().exec("ping -c " + np + " " + ip );
         var st = p.getInputStream();
         StringBuilder route = new StringBuilder();
         int r;
