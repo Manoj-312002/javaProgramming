@@ -30,6 +30,7 @@ int main(){
 	for(int i = 0; i < E ; i++){
 		int u , v , w; cin >> u >> v >> w;
 		graph[i] = {u,v,w};
+		graph[E + i] = {v,u,w};
 	}
 
 	distance[0] = 0;
