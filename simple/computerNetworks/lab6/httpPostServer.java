@@ -7,7 +7,7 @@ import java.net.Socket;
 public class httpPostServer {
 
     public static void main( String[] args ) throws Exception {
-        try (ServerSocket serverSocket = new ServerSocket(8000) ) {
+        try (ServerSocket serverSocket = new ServerSocket(80) ) {
             while (true) {
                 try (Socket client = serverSocket.accept()) {
                     handleClient(client);

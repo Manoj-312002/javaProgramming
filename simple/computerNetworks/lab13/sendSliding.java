@@ -15,7 +15,7 @@ public class sendSliding{
         - window size is 5
     */
     private int window_size = 5;
-    private ArrayList<String> data = new ArrayList<>( Arrays.asList( "The" , "quick" , "brown" , "fox" , "jumps" , "over" , "the" , "lazy" , "dog" ) );
+    private ArrayList<String> data = new ArrayList<>( Arrays.asList( "The" , "quick" , "brown" , "fox" , "jumps" , "over" , "the" , "lazy" , "dog", "my" , "name" , "is" , "manoj" ) );
     
     private int send_base;      // last packet successfully acked
     private int next_seq_num;   // next seq number to send
@@ -30,18 +30,19 @@ public class sendSliding{
 
     public void send_pck(int i){
         // Sends data over TCP - only seq number is sent next line data
+        // System.out.println(i);
         sout.println( ini_seq + pck_size*i );
         sout.println( data.get(i) );
+        System.out.println( i + " " + data.get(i) );
     }
 
     public void rcv_pck() throws Exception {
         int rcv_ack = (Integer.valueOf( sin.readLine() ) - ini_seq )/pck_size;
-        send_base = Math.max(send_base , rcv_ack );
+        send_base = Math.max(send_base , rcv_ack-1 );
     }
 
     public void run() throws Exception{
         while( send_base < data.size() ){
-            
             int s = (next_seq_num - ini_seq)/pck_size;
             for(int i = s; i < Math.min(data.size() , send_base + window_size ) ; i++ ) send_pck(i);
             
@@ -50,14 +51,13 @@ public class sendSliding{
             // need not manually call rcv_pck -> but if new pck recvd update
             int st = Math.min( send_base + window_size , data.size() );
             for(int i = s; i < st ; i++ ) rcv_pck();
-
+            
             // resend single packet in tcp
             if( send_base < st ) send_pck(send_base);
-            next_seq_num = ini_seq + (st+1)*pck_size;
+            next_seq_num = ini_seq + (st)*pck_size;
             
             System.out.println("Next seq num " + next_seq_num );
             System.out.println("Send base " + send_base );
-            
         }
     }
 
